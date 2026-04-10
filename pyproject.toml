@@ -1,0 +1,22 @@
+[project]
+name = "django-logging-management-command"
+version = "0.1.0"
+description = "Easily create Django management commands with automatic support for verbosity handling and logging"
+readme = "README.md"
+authors = [
+    { name = "Tom Hendrikx", email = "tom@whyscream.net" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "django>=5.2.13",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.21,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "ipdb>=0.13.13",
+    "pytest>=9.0.3",
+]
