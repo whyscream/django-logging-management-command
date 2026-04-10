@@ -11,3 +11,7 @@ For details, see https://forum.djangoproject.com/t/implement-default-handling-of
 # Testing
 
 Use `pytest` to run the included tests.
+
+# License
+
+All code is `BSD 3-clause` licensed, See [LICENSE](LICENSE) for details.
