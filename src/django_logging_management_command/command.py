@@ -9,8 +9,8 @@ VERBOSITY_LOGGING_LEVELS = {
     3: logging.DEBUG,
 }
 
-class LoggingBaseCommand(BaseCommand):
-    """A replacement for BaseCommand, supporting logging and verbosity handling out of the box."""
+class VerbosityCommandMixin:
+    """A mixin for BaseCommand, supporting logging and verbosity handling out of the box."""
 
     def __init__(self, *args, **kwargs):
         self.log = logging.getLogger(__name__)

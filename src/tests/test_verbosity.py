@@ -1,12 +1,13 @@
+import json
 import logging
 
 import pytest
-from django.core.management import call_command
+from django.core.management import call_command, BaseCommand
 
-from django_logging_management_command.command import LoggingBaseCommand
+from django_logging_management_command.command import VerbosityCommandMixin
 
 
-class LoggingTestCommand(LoggingBaseCommand):
+class VerbosityTestCommand(VerbosityCommandMixin, BaseCommand):
     def handle(self, *args, **options):
         self.log.debug("Log message at DEBUG level")
         self.log.info("Log message at INFO level")
@@ -21,7 +22,7 @@ class LoggingTestCommand(LoggingBaseCommand):
 
 @pytest.fixture
 def cmd():
-    return LoggingTestCommand()
+    return VerbosityTestCommand()
 
 
 def test_default_verbosity(cmd, caplog):
