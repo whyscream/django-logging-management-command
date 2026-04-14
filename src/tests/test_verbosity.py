@@ -1,4 +1,3 @@
-import json
 import logging
 
 import pytest
@@ -58,3 +57,24 @@ def test_set_specific_verbosity(cmd, caplog, verbosity, log_level, log_record_co
         assert record.levelno >= log_level
 
     assert len(caplog.records) == log_record_count, f"The test command should emit {log_record_count} messages at level {log_level}"
+
+
+def test_default_logger_name(cmd, caplog):
+    # the logger is named after the module ('file name') defining the command class.
+    assert cmd.log.name == "django.command.test_verbosity"
+
+    call_command(cmd)
+    for record in caplog.records:
+        assert record.name == "django.command.test_verbosity"
+
+
+def test_custom_logger_name(caplog):
+    class CustomLoggerNameCommand(VerbosityTestCommand):
+        logger_name = "django.command.my_custom_logger_name"
+
+    cmd = CustomLoggerNameCommand()
+    assert cmd.log.name == "django.command.my_custom_logger_name"
+
+    call_command(cmd)
+    for record in caplog.records:
+        assert record.name == "django.command.my_custom_logger_name"
